@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../Yoloo Web"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Experiment Web"
+	}
+}
