@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoloo Studio – Blog</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <img src="../Asset/Image/logo.png" alt="Logo">
+                <span>GameSite</span>
+            </div>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="./Games.html">Games</a></li>
+                <li><a href="./Blog.html" class="active">Blog</a></li>
+                <li><a href="./Store.html">Store</a></li>
+                <li><a href="./Contact.html">Contact</a></li>
+                <li><a href="./About.html">About</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="container">
+        <div class="section-header" style="display:flex; align-items:center; justify-content:space-between; text-align:left; flex-wrap:wrap; gap:16px;">
+            <div>
+                <h1 style="margin-bottom:6px;">📝 Semua Artikel</h1>
+                <p>Total: <strong id="blogCount">0 artikel</strong> — Diurutkan berdasarkan terbaru</p>
+            </div>
+            <button class="all-news-btn" onclick="openModal('blogModal')" style="flex-shrink:0;">+ Tambah Artikel</button>
+        </div>
+
+        <!-- Blog List -->
+        <div class="blog-preview-container" id="allBlogs">
+            <!-- Rendered by app.js -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>GameSite</h3>
+                <p>Platform terbaik untuk menemukan game favorit Anda.</p>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#" title="Facebook"><img src="../Asset/Image/facebook-icon.png" alt="Facebook"></a>
+                    <a href="#" title="Twitter"><img src="../Asset/Image/twitter-icon.png" alt="Twitter"></a>
+                    <a href="#" title="Instagram"><img src="../Asset/Image/instagram-icon.png" alt="Instagram"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2024 GameSite. All rights reserved.</p></div>
+    </footer>
+
+    <!-- Modal Add Blog -->
+    <div class="yl-modal-overlay" id="blogModal">
+        <div class="yl-modal">
+            <h3>📝 Tambah Artikel Blog</h3>
+            <form id="addBlogForm">
+                <div class="yl-form-group">
+                    <label>Judul Artikel *</label>
+                    <input type="text" name="blogTitle" placeholder="Contoh: Tips Bermain Elden Ring" required />
+                </div>
+                <div class="yl-form-group">
+                    <label>Konten / Paragraf *</label>
+                    <textarea name="blogContent" placeholder="Tulis isi artikel di sini..." rows="6" required></textarea>
+                </div>
+                <div class="yl-form-group">
+                    <label>URL Gambar (opsional)</label>
+                    <input type="url" name="blogImage" placeholder="https://..." />
+                </div>
+                <div class="yl-modal-footer">
+                    <button type="button" class="yl-btn-outline" onclick="closeModal('blogModal')">Batal</button>
+                    <button type="submit" class="all-news-btn" style="padding:10px 28px; font-size:0.9em;">Simpan Artikel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="../app.js"></script>
+    <script>initBlog();</script>
+</body>
+</html>

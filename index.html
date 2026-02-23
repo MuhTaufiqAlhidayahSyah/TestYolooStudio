@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoloo Studio</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <img src="./Asset/Image/horizontal_white@4x.png" alt="Logo">
+            </div>
+            <ul>
+                <li><a href="./index.html" class="active">Home</a></li>
+                <li><a href="./public/Games.html">Games</a></li>
+                <li><a href="./public/Blog.html">Blog</a></li>
+                <li><a href="./public/Store.html">Store</a></li>
+                <li><a href="./public/Contact.html">Contact</a></li>
+                <li><a href="./public/About.html">About</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Hero Slideshow -->
+    <div class="hero-slideshow">
+        <div class="hero-slide active-slide" data-index="0">
+            <a href="./public/game1.html" class="hero-slide-link">
+                <div class="hero-slide-bg" style="background-image: url('./Asset/Image/Game1.png')"></div>
+                <div class="hero-slide-overlay"></div>
+                <div class="hero-slide-content">
+                    <span class="hero-slide-tag">Action</span>
+                    <h2>Game Action Terbaru</h2>
+                    <p>Rasakan sensasi pertarungan epik yang belum pernah ada sebelumnya</p>
+                </div>
+            </a>
+        </div>
+        <div class="hero-slide" data-index="1">
+            <a href="./public/game2.html" class="hero-slide-link">
+                <div class="hero-slide-bg" style="background-image: url('./Asset/Image/hk.png')"></div>
+                <div class="hero-slide-overlay"></div>
+                <div class="hero-slide-content">
+                    <span class="hero-slide-tag">Adventure</span>
+                    <h2>Petualangan Epik Menanti</h2>
+                    <p>Jelajahi dunia yang luas penuh misteri dan tantangan</p>
+                </div>
+            </a>
+        </div>
+        <div class="hero-slide" data-index="2">
+            <a href="./public/game3.html" class="hero-slide-link">
+                <div class="hero-slide-bg" style="background-image: url('./Asset/Image/hks.png')"></div>
+                <div class="hero-slide-overlay"></div>
+                <div class="hero-slide-content">
+                    <span class="hero-slide-tag">Strategy</span>
+                    <h2>Game Strategi Terbaik</h2>
+                    <p>Uji kecerdasan dan taktik Anda di medan perang digital</p>
+                </div>
+            </a>
+        </div>
+        <div class="hero-slide" data-index="3">
+            <a href="./public/game4.html" class="hero-slide-link">
+                <div class="hero-slide-bg" style="background-image: url('./Asset/Image/News1.png')"></div>
+                <div class="hero-slide-overlay"></div>
+                <div class="hero-slide-content">
+                    <span class="hero-slide-tag">RPG</span>
+                    <h2>RPG dengan Cerita Mendalam</h2>
+                    <p>Temukan kisah yang akan mengubah cara pandang Anda</p>
+                </div>
+            </a>
+        </div>
+        <div class="hero-slide" data-index="4">
+            <a href="./public/game5.html" class="hero-slide-link">
+                <div class="hero-slide-bg" style="background-image: url('./Asset/Image/News1.png')"></div>
+                <div class="hero-slide-overlay"></div>
+                <div class="hero-slide-content">
+                    <span class="hero-slide-tag">Multiplayer</span>
+                    <h2>Multiplayer Seru Bersama Teman</h2>
+                    <p>Bergabung dan taklukkan bersama squad terbaik Anda</p>
+                </div>
+            </a>
+        </div>
+        <button class="hero-prev" onclick="heroSlide(-1)">&#10094;</button>
+        <button class="hero-next" onclick="heroSlide(1)">&#10095;</button>
+        <div class="hero-thumbnails">
+            <div class="hero-thumb active-thumb" onclick="heroGoTo(0)"><img src="./Asset/Image/Game1.png" alt="Game 1"><div class="hero-thumb-overlay"></div></div>
+            <div class="hero-thumb" onclick="heroGoTo(1)"><img src="./Asset/Image/hk.png" alt="Game 2"><div class="hero-thumb-overlay"></div></div>
+            <div class="hero-thumb" onclick="heroGoTo(2)"><img src="./Asset/Image/hks.png" alt="Game 3"><div class="hero-thumb-overlay"></div></div>
+            <div class="hero-thumb" onclick="heroGoTo(3)"><img src="./Asset/Image/News1.png" alt="Game 4"><div class="hero-thumb-overlay"></div></div>
+            <div class="hero-thumb" onclick="heroGoTo(4)"><img src="./Asset/Image/News1.png" alt="Game 5"><div class="hero-thumb-overlay"></div></div>
+        </div>
+        <div class="hero-progress"><div class="hero-progress-bar" id="heroProgressBar"></div></div>
+    </div>
+
+    <script>
+        let heroIndex = 0;
+        let heroTimer;
+        const heroDuration = 5000;
+        const heroSlides = document.querySelectorAll('.hero-slide');
+        const heroThumbs = document.querySelectorAll('.hero-thumb');
+        const heroProgressBar = document.getElementById('heroProgressBar');
+
+        function heroUpdate(index) {
+            heroSlides.forEach(s => s.classList.remove('active-slide', 'exit-slide'));
+            heroThumbs.forEach(t => t.classList.remove('active-thumb'));
+            heroSlides[heroIndex].classList.add('exit-slide');
+            heroIndex = (index + heroSlides.length) % heroSlides.length;
+            heroSlides[heroIndex].classList.add('active-slide');
+            heroThumbs[heroIndex].classList.add('active-thumb');
+            heroProgressBar.style.transition = 'none';
+            heroProgressBar.style.width = '0%';
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    heroProgressBar.style.transition = `width ${heroDuration}ms linear`;
+                    heroProgressBar.style.width = '100%';
+                });
+            });
+        }
+
+        function heroSlide(dir) { clearTimeout(heroTimer); heroUpdate(heroIndex + dir); heroAutoPlay(); }
+        function heroGoTo(index) { clearTimeout(heroTimer); heroUpdate(index); heroAutoPlay(); }
+        function heroAutoPlay() {
+            heroTimer = setTimeout(() => { heroUpdate(heroIndex + 1); heroAutoPlay(); }, heroDuration);
+        }
+
+        heroUpdate(0);
+        heroAutoPlay();
+    </script>
+
+    <!-- Section Games (Dynamic - max 3) -->
+    <div class="container">
+        <div class="section-header">
+            <h1>Games</h1>
+            <p>Game terbaru dari koleksi kami</p>
+        </div>
+        <div class="blog-preview-container" id="indexGames">
+            <!-- Rendered by app.js -->
+        </div>
+        <div class="all-news-btn-container">
+            <a href="./public/Games.html" class="all-news-btn">Lihat Semua Game →</a>
+        </div>
+    </div>
+
+    <!-- Section Blog (Dynamic - max 3) -->
+    <div class="container">
+        <div class="section-header">
+            <h1>Blog</h1>
+            <p>Artikel dan berita terbaru seputar gaming</p>
+        </div>
+        <div class="blog-preview-container" id="indexBlogs">
+            <!-- Rendered by app.js -->
+        </div>
+        <div class="all-news-btn-container">
+            <a href="./public/Blog.html" class="all-news-btn">All News</a>
+        </div>
+    </div>
+
+    <!-- Section About Us -->
+    <div class="container">
+        <div class="section-header">
+            <h1>About Us</h1>
+            <p>Kenali lebih dekat studio kami dan visi yang kami bawa</p>
+        </div>
+        <div class="about-us-content">
+            <div class="about-us-image">
+                <img src="./Asset/Image/studio-team.jpg" alt="Team Studio">
+            </div>
+            <div class="about-us-text">
+                <p>Kami adalah studio game indie yang berdedikasi untuk menciptakan pengalaman bermain game yang unik dan memorable. Didirikan pada tahun 2020, tim kami terdiri dari para developer, artist, dan storyteller yang passionate dalam menghadirkan game berkualitas tinggi dengan cerita yang menarik.</p>
+                <p>Dengan fokus pada inovasi dan kreativitas, kami terus mengembangkan game yang tidak hanya menghibur, tetapi juga memberikan pengalaman yang bermakna bagi para pemain.</p>
+                <a href="./public/About.html" class="read-more-btn">Selengkapnya →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="contact-section">
+        <div class="contact-card">
+            <div class="contact-card-left">
+                <h2>Ada Pertanyaan<br>atau Kolaborasi?</h2>
+                <a href="./public/Contact.html" class="contact-btn">Contact Us</a>
+            </div>
+            <div class="contact-card-right">
+                <img src="./Asset/Image/maskot.png" alt="Maskot">
+            </div>
+        </div>
+    </div>
+
+    <!-- Community -->
+    <div class="community-section">
+        <div class="community-content">
+            <h1>Our Community</h1>
+            <p>Join Our Discord</p>
+        </div>
+        <a href="https://discord.gg/yourserver" target="_blank" class="community-card">
+            <div class="community-image">
+                <img src="./Asset/Image/discord-community.png" alt="Discord Community">
+            </div>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>GameSite</h3>
+                <p>Platform terbaik untuk menemukan game favorit Anda. Jelajahi koleksi game terbaru dan terpopuler.</p>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="https://facebook.com/yourpage" target="_blank" title="Facebook"><img src="./Asset/Image/facebook-icon.png" alt="Facebook"></a>
+                    <a href="https://twitter.com/yourpage" target="_blank" title="Twitter"><img src="./Asset/Image/twitter-icon.png" alt="Twitter"></a>
+                    <a href="https://instagram.com/yourpage" target="_blank" title="Instagram"><img src="./Asset/Image/instagram-icon.png" alt="Instagram"></a>
+                    <a href="https://youtube.com/yourchannel" target="_blank" title="YouTube"><img src="./Asset/Image/youtube-icon.png" alt="YouTube"></a>
+                    <a href="https://discord.gg/yourserver" target="_blank" title="Discord"><img src="./Asset/Image/discord-icon.png" alt="Discord"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 GameSite. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="toast" class="toast"></div>
+    <script src="app.js"></script>
+    <script>initIndex();</script>
+</body>
+</html>
