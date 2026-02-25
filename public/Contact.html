@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact – Yoloo Studio</title>
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+        /* ── Page-specific styles ── */
+        .contact-hero {
+            min-height: calc(100vh - 60px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 60px 20px;
+        }
+
+        /* Ambient orbs */
+        .contact-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            pointer-events: none;
+            animation: orbFloat 8s ease-in-out infinite alternate;
+        }
+        .contact-orb-1 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(90,168,230,0.18) 0%, transparent 70%);
+            top: -100px; left: -100px;
+            animation-delay: 0s;
+        }
+        .contact-orb-2 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(90,230,200,0.12) 0%, transparent 70%);
+            bottom: -80px; right: -80px;
+            animation-delay: 3s;
+        }
+        .contact-orb-3 {
+            width: 280px; height: 280px;
+            background: radial-gradient(circle, rgba(90,168,230,0.1) 0%, transparent 70%);
+            top: 40%; right: 15%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes orbFloat {
+            from { transform: translateY(0) scale(1); }
+            to   { transform: translateY(-30px) scale(1.08); }
+        }
+
+        /* Center card */
+        .contact-card-wrap {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 560px;
+            width: 100%;
+            animation: fadeUp 0.8s cubic-bezier(0.4,0,0.2,1) both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(36px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Icon circle */
+        .contact-icon-ring {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(90,168,230,0.35);
+            background: rgba(90,168,230,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 32px;
+            position: relative;
+            animation: ringPulse 3s ease-in-out infinite;
+        }
+        .contact-icon-ring::before {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            border-radius: 50%;
+            border: 1px solid rgba(90,168,230,0.15);
+            animation: ringPulse 3s ease-in-out infinite 0.5s;
+        }
+        .contact-icon-ring::after {
+            content: '';
+            position: absolute;
+            inset: -22px;
+            border-radius: 50%;
+            border: 1px solid rgba(90,168,230,0.07);
+            animation: ringPulse 3s ease-in-out infinite 1s;
+        }
+        .contact-icon-ring svg {
+            width: 36px;
+            height: 36px;
+            color: var(--blue-primary, #5AA8E6);
+        }
+
+        @keyframes ringPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50%       { transform: scale(1.04); opacity: 0.8; }
+        }
+
+        /* Eyebrow label */
+        .contact-eyebrow {
+            display: inline-block;
+            font-size: 0.72em;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--blue-primary, #5AA8E6);
+            background: rgba(90,168,230,0.1);
+            border: 1px solid rgba(90,168,230,0.2);
+            border-radius: 50px;
+            padding: 4px 16px;
+            margin-bottom: 20px;
+        }
+
+        /* Headline */
+        .contact-headline {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        .contact-headline span {
+            background: linear-gradient(90deg, var(--blue-primary, #5AA8E6), #7be6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Sub text */
+        .contact-sub {
+            color: var(--gray, #8faec7);
+            font-size: 0.98em;
+            line-height: 1.7;
+            margin-bottom: 44px;
+            max-width: 420px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* The email button */
+        .contact-email-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 38px;
+            background: var(--blue-primary, #5AA8E6);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1em;
+            font-family: 'Lexend Deca', Arial, sans-serif;
+            letter-spacing: 0.01em;
+            box-shadow: 0 8px 30px rgba(90,168,230,0.35), 0 0 0 0 rgba(90,168,230,0.4);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-email-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+            border-radius: inherit;
+            pointer-events: none;
+        }
+
+        .contact-email-btn:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 16px 50px rgba(90,168,230,0.5), 0 0 0 6px rgba(90,168,230,0.12);
+            background: var(--blue-light, #7bbfed);
+        }
+
+        .contact-email-btn:active {
+            transform: translateY(-1px) scale(0.99);
+        }
+
+        .contact-email-btn svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        /* Address hint below button */
+        .contact-email-hint {
+            margin-top: 18px;
+            color: var(--gray-dark, #6a8fa8);
+            font-size: 0.82em;
+            letter-spacing: 0.03em;
+        }
+
+        /* Divider dots */
+        .contact-dots {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin: 48px auto 0;
+        }
+        .contact-dots span {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: rgba(90,168,230,0.3);
+        }
+        .contact-dots span:nth-child(2) { background: rgba(90,168,230,0.55); }
+
+        @media (max-width: 480px) {
+            .contact-email-btn { padding: 16px 28px; font-size: 0.92em; }
+            .contact-icon-ring { width: 72px; height: 72px; }
+            .contact-icon-ring svg { width: 28px; height: 28px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <img src="../Asset/Image/horizontal_white@4x.png" alt="Logo">
+            </div>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="./Games.html">Games</a></li>
+                <li><a href="./Blog.html">Blog</a></li>
+                <li><a href="./Store.html">Store</a></li>
+                <li><a href="./Contact.html" class="active">Contact</a></li>
+                <li><a href="./About.html">About</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Contact Hero -->
+    <section class="contact-hero">
+        <div class="contact-grid-bg"></div>
+        <div class="contact-orb contact-orb-1"></div>
+        <div class="contact-orb contact-orb-2"></div>
+        <div class="contact-orb contact-orb-3"></div>
+
+        <div class="contact-card-wrap">
+
+            <!-- Pulsing icon -->
+            <div class="contact-icon-ring">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="4" width="20" height="16" rx="3"/>
+                    <path d="M2 7l10 7 10-7"/>
+                </svg>
+            </div>
+
+            <div class="contact-eyebrow">Hubungi Kami</div>
+
+            <h1 class="contact-headline">
+                Ada pertanyaan atau<br><span>kolaborasi?</span>
+            </h1>
+
+            <p class="contact-sub">
+                Kami senang mendengar dari Anda — baik itu pertanyaan seputar game kami,
+                peluang kolaborasi, atau sekadar menyapa.
+            </p>
+
+            <a href="mailto:info@yoloo.studio" class="contact-email-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/>
+                </svg>
+                Kirim Email ke Kami
+            </a>
+
+            <p class="contact-email-hint">info@yoloo.studio</p>
+
+            <div class="contact-dots">
+                <span></span><span></span><span></span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>GameSite</h3>
+                <p>Platform terbaik untuk menemukan game favorit Anda.</p>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="https://facebook.com/yourpage" target="_blank" title="Facebook"><img src="../Asset/Image/facebook-icon.png" alt="Facebook"></a>
+                    <a href="https://twitter.com/yourpage" target="_blank" title="Twitter"><img src="../Asset/Image/twitter-icon.png" alt="Twitter"></a>
+                    <a href="https://instagram.com/yourpage" target="_blank" title="Instagram"><img src="../Asset/Image/instagram-icon.png" alt="Instagram"></a>
+                    <a href="https://youtube.com/yourchannel" target="_blank" title="YouTube"><img src="../Asset/Image/youtube-icon.png" alt="YouTube"></a>
+                    <a href="https://discord.gg/yourserver" target="_blank" title="Discord"><img src="../Asset/Image/discord-icon.png" alt="Discord"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 GameSite. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

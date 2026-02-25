@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoloo Studio – Store</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <img src="../Asset/Image/logo.png" alt="Logo">
+                <span>GameSite</span>
+            </div>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="./Games.html">Games</a></li>
+                <li><a href="./Blog.html">Blog</a></li>
+                <li><a href="./Store.html" class="active">Store</a></li>
+                <li><a href="./Contact.html">Contact</a></li>
+                <li><a href="./About.html">About</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="container">
+        <div class="section-header store-page-header">
+            <div class="store-header-text">
+                <h1 style="margin-bottom:6px;">🛒 Store</h1>
+                <p>Total: <strong id="storeCount">0 produk</strong> — Temukan produk terbaik dari kami</p>
+            </div>
+            <button class="all-news-btn" onclick="openModal('storeModal')" style="flex-shrink:0;">+ Tambah Produk</button>
+        </div>
+
+        <!-- Store Grid -->
+        <div class="store-grid" id="allProducts">
+            <!-- Rendered by app.js -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>GameSite</h3>
+                <p>Platform terbaik untuk menemukan game favorit Anda.</p>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#" title="Facebook"><img src="../Asset/Image/facebook-icon.png" alt="Facebook"></a>
+                    <a href="#" title="Twitter"><img src="../Asset/Image/twitter-icon.png" alt="Twitter"></a>
+                    <a href="#" title="Instagram"><img src="../Asset/Image/instagram-icon.png" alt="Instagram"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2024 GameSite. All rights reserved.</p></div>
+    </footer>
+
+    <!-- Modal Add Product -->
+    <div class="yl-modal-overlay" id="storeModal">
+        <div class="yl-modal">
+            <h3>🛒 Tambah Produk Baru</h3>
+            <form id="addProductForm">
+                <div class="yl-form-group">
+                    <label>Nama Produk *</label>
+                    <input type="text" name="productName" placeholder="Contoh: Elden Ring – PC Digital" required />
+                </div>
+                <div class="yl-form-group">
+                    <label>Harga *</label>
+                    <input type="number" name="productPrice" placeholder="Contoh: 199000" min="0" required />
+                </div>
+                <div class="yl-form-group">
+                    <label>Kategori</label>
+                    <select name="productCategory">
+                        <option value="">— Pilih Kategori —</option>
+                        <option>Game Digital</option>
+                        <option>Merchandise</option>
+                        <option>DLC / Ekspansi</option>
+                        <option>Aksesoris</option>
+                        <option>Bundle</option>
+                        <option>Lainnya</option>
+                    </select>
+                </div>
+                <div class="yl-form-group">
+                    <label>Deskripsi Singkat</label>
+                    <textarea name="productDesc" placeholder="Deskripsi produk..." rows="3"></textarea>
+                </div>
+                <div class="yl-form-group">
+                    <label>URL Gambar *</label>
+                    <input type="url" name="productImage" placeholder="https://..." required />
+                </div>
+                <div class="yl-form-group">
+                    <label>Link Marketplace *</label>
+                    <input type="url" name="productMarketplace" placeholder="https://tokopedia.com/..." required />
+                </div>
+                <div class="yl-modal-footer">
+                    <button type="button" class="yl-btn-outline" onclick="closeModal('storeModal')">Batal</button>
+                    <button type="submit" class="all-news-btn" style="padding:10px 28px; font-size:0.9em;">Simpan Produk</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="../app.js"></script>
+    <script>initStore();</script>
+</body>
+</html>
