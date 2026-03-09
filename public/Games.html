@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoloo Studio – Games</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <img src="../Asset/Image/logo.png" alt="Logo">
+                <span>GameSite</span>
+            </div>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="./About.html">About</a></li>
+                <li><a href="./Games.html" class="active">Games</a></li>
+                <li><a href="./Blog.html">News</a></li>
+                <li><a href="./Store.html">Merch</a></li>
+                <li><a href="./Contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Hero Banner -->
+    <div class="page-hero-banner">
+        <div class="page-hero-bg" id="pageBannerBg"></div>
+        <div class="page-hero-placeholder" id="pageBannerPlaceholder">
+            <span class="page-hero-placeholder-icon">🎮</span>
+            <p>Klik tombol "Ubah Banner" untuk menambahkan gambar</p>
+        </div>
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <span class="page-hero-tag">Games</span>
+            <h1>Semua Game</h1>
+            <p>Jelajahi koleksi game pilihan kami — dari RPG epik hingga battle royale seru.</p>
+        </div>
+        <button class="page-hero-edit-btn" onclick="openBannerModal()">✏️ Ubah Banner</button>
+    </div>
+
+    <!-- Banner Modal -->
+    <div class="banner-modal-overlay" id="bannerModalOverlay">
+        <div class="banner-modal">
+            <h3>🖼️ Ubah Gambar Banner</h3>
+            <div class="banner-tab-row">
+                <button class="banner-tab-btn active" data-tab="tabFile">📁 Upload File</button>
+                <button class="banner-tab-btn" data-tab="tabUrl">🔗 URL Gambar</button>
+            </div>
+            <div class="banner-tab-panel active" id="tabFile">
+                <div class="banner-dropzone" id="bannerDropzone">
+                    <input type="file" id="bannerFileInput" accept="image/*">
+                    <span class="banner-dropzone-icon">📂</span>
+                    <p><strong>Klik untuk pilih file</strong> atau seret gambar ke sini</p>
+                    <p class="file-hint">PNG, JPG, WEBP — maks. 5MB</p>
+                </div>
+                <div class="banner-preview-wrap" id="bannerFilePreview">
+                    <img id="bannerFilePreviewImg" src="" alt="Preview">
+                </div>
+            </div>
+            <div class="banner-tab-panel" id="tabUrl">
+                <div class="banner-url-group">
+                    <label>URL Gambar</label>
+                    <input type="url" id="bannerUrlInput" placeholder="https://contoh.com/gambar.jpg">
+                </div>
+                <div class="banner-preview-wrap" id="bannerUrlPreview">
+                    <img id="bannerUrlPreviewImg" src="" alt="Preview URL">
+                </div>
+            </div>
+            <div class="banner-modal-footer">
+                <button class="banner-btn-reset" id="bannerResetBtn">🗑 Reset</button>
+                <button class="banner-btn-cancel" onclick="closeBannerModal()">Batal</button>
+                <button class="banner-btn-apply" id="bannerApplyBtn">Terapkan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="container">
+        <div class="section-header" style="display:flex; align-items:center; justify-content:space-between; text-align:left; flex-wrap:wrap; gap:16px;">
+            <div>
+                <h1 style="margin-bottom:6px;">🎮 Semua Game</h1>
+                <p>Total: <strong id="gameCount">0 game</strong> — Diurutkan berdasarkan terbaru</p>
+            </div>
+            <button class="all-news-btn" onclick="openModal('gameModal')" style="flex-shrink:0;">+ Tambah Game</button>
+        </div>
+
+        <!-- Game List -->
+        <div class="blog-preview-container" id="allGames">
+            <!-- Rendered by app.js -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>GameSite</h3>
+                <p>Platform terbaik untuk menemukan game favorit Anda. Jelajahi koleksi game terbaru dan terpopuler.</p>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="https://facebook.com/yourpage" target="_blank" title="Facebook"><img src="./Asset/Image/facebook-icon.png" alt="Facebook"></a>
+                    <a href="https://twitter.com/yourpage" target="_blank" title="Twitter"><img src="./Asset/Image/twitter-icon.png" alt="Twitter"></a>
+                    <a href="https://instagram.com/yourpage" target="_blank" title="Instagram"><img src="./Asset/Image/instagram-icon.png" alt="Instagram"></a>
+                    <a href="https://youtube.com/yourchannel" target="_blank" title="YouTube"><img src="./Asset/Image/youtube-icon.png" alt="YouTube"></a>
+                    <a href="https://discord.gg/yourserver" target="_blank" title="Discord"><img src="./Asset/Image/discord-icon.png" alt="Discord"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 GameSite. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modal Add Game -->
+    <div class="yl-modal-overlay" id="gameModal">
+        <div class="yl-modal">
+            <h3>🎮 Tambah Game Baru</h3>
+            <form id="addGameForm">
+                <div class="yl-form-group">
+                    <label>Judul Game *</label>
+                    <input type="text" name="gameTitle" placeholder="Contoh: Elden Ring" required />
+                </div>
+                <div class="yl-form-group">
+                    <label>Genre *</label>
+                    <select name="gameGenre" required>
+                        <option value="">— Pilih Genre —</option>
+                        <option>Action RPG</option>
+                        <option>Strategy</option>
+                        <option>FPS</option>
+                        <option>Adventure</option>
+                        <option>Simulation</option>
+                        <option>Horror</option>
+                        <option>Sports</option>
+                        <option>Puzzle</option>
+                        <option>MMORPG</option>
+                        <option>Battle Royale</option>
+                        <option>Lainnya</option>
+                    </select>
+                </div>
+                <div class="yl-form-group">
+                    <label>Sinopsis Singkat *</label>
+                    <textarea name="gameSynopsis" placeholder="Deskripsi singkat tentang game ini..." rows="4" required></textarea>
+                </div>
+                <div class="yl-form-group" id="gameImgGroup">
+                    <label>Gambar (opsional)</label>
+                    <div class="fip-tab-row">
+                        <button type="button" class="fip-tab-btn active" data-panel="gameTabFile">📁 Upload File</button>
+                        <button type="button" class="fip-tab-btn" data-panel="gameTabUrl">🔗 URL Gambar</button>
+                    </div>
+                    <div class="fip-panel active" id="gameTabFile">
+                        <div class="fip-dropzone" id="gameDropzone">
+                            <input type="file" id="gameFileInput" accept="image/*" style="display:none">
+                            <span class="fip-dz-icon">📂</span>
+                            <p><strong>Klik untuk pilih file</strong> atau seret gambar ke sini</p>
+                            <p class="fip-hint">PNG, JPG, WEBP — maks. 5MB</p>
+                        </div>
+                    </div>
+                    <div class="fip-panel" id="gameTabUrl">
+                        <input type="url" id="gameUrlInput" class="fip-url-input" placeholder="https://contoh.com/gambar.jpg" />
+                    </div>
+                    <div class="fip-preview-wrap" id="gamePreviewWrap" style="display:none">
+                        <img id="gamePreviewImg" src="" alt="Preview">
+                    </div>
+                </div>
+                <div class="yl-modal-footer">
+                    <button type="button" class="yl-btn-outline" onclick="closeModal('gameModal')">Batal</button>
+                    <button type="submit" class="all-news-btn" style="padding:10px 28px; font-size:0.9em;">Simpan Game</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="../app.js"></script>
+    <script>
+        initGame();
+        initPageBanner('banner_games', 'Games', 'Semua Game', 'Jelajahi koleksi game pilihan kami.');
+    </script>
+</body>
+</html>
